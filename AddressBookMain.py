@@ -1,25 +1,26 @@
 from contact import Contact
 from AddressBook import Addressbook
 
-#UC4 - Ability to delete a person using person's name
-
+#UC5 - add multiple person to Address Book
 class AddressBookMain:
     def __init__(self):
         self.address_book=Addressbook()
         
     def display_menu(self):
         print("Welcome to Address Book Program")
-        choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\nEnter your choice:"))
-        if choice==1:
-            self.add_contact_console()
-        elif choice==2:
-            self.edit_contact_console()
-        elif choice==3:
-            self.delete_contact_console()
-        elif choice==4:
-            self.address_book.view_all_contact()
-        else:
-            print("Invalid choice:")
+        while True:  # add multiple person
+            choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\nEnter your choice:"))
+            if choice==1:
+                self.add_contact_console()
+            elif choice==2:
+                self.edit_contact_console()
+            elif choice==3:
+                self.delete_contact_console()
+            elif choice==4:
+                self.address_book.view_all_contact()
+            else:
+                print("Invalid choice:")
+                break
 
     def add_contact_console(self):  # add a new Contact
         print("Enter the details:")

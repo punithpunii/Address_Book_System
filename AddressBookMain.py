@@ -1,7 +1,7 @@
 from contact import Contact
 from AddressBook import Addressbook
 
-#UC3 - edit existing contact person using their name
+#UC4 - Ability to delete a person using person's name
 
 class AddressBookMain:
     def __init__(self):
@@ -9,12 +9,17 @@ class AddressBookMain:
         
     def display_menu(self):
         print("Welcome to Address Book Program")
-        while True:
-            choice=int(input("1. Add Contact:"))
-            if choice==1:
-                self.add_contact_console()
-            elif choice==2:
-                self.edit_contact_console()
+        choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\nEnter your choice:"))
+        if choice==1:
+            self.add_contact_console()
+        elif choice==2:
+            self.edit_contact_console()
+        elif choice==3:
+            self.delete_contact_console()
+        elif choice==4:
+            self.address_book.view_all_contact()
+        else:
+            print("Invalid choice:")
 
     def add_contact_console(self):  # add a new Contact
         print("Enter the details:")
@@ -41,9 +46,12 @@ class AddressBookMain:
         email=input("E-mail:")
 
         updated_contact=Contact(firstname,lastname,address,city,state,zip,phonenumber,email)
-        self.Ab.edit_contact(firstname,updated_contact)         
-    
-        
+        self.Ab.edit_contact(firstname,updated_contact)        
+
+    def delete_contact_console(self):  # delete existing contact
+        firstname = input("Enter the First name of Contact to be Deleted:")
+        self.Ab.delete_contact(firstname)
+
 add1=AddressBookMain()
 add1.display_menu()
 

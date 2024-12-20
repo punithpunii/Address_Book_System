@@ -21,7 +21,7 @@ class Addressbook:
             else:
                 print("Invalid Name!")
 
-    def view_all_contact(self):
+    def view_all_contact(self):  # view all the existing contact
         print("All Contacts:")
         for contact in self.contacts:
             print(contact)

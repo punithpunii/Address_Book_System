@@ -1,7 +1,7 @@
 from contact import Contact
 from AddressBook import Addressbook
 
-# UC-11 sort the entries in the address book alphabetically by Person’s name
+# UC-12 Ability to sort the entries in the address book by City, State, or Zip 
 class AddressBookMain:
     def __init__(self):
         self.address_book_sytem={}
@@ -62,7 +62,7 @@ class AddressBookMain:
         if name in self.address_book_sytem:
 
             while True:  # add multiple person
-                choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\n5. Sorted order of Contacts\n6. Return to Main Menu\nEnter your choice:"))
+                choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\n5. Sorted order of Contacts\n6. Sort by City, State or Zip\n7. Return to Main Menu\nEnter your choice:"))
                 if choice==1:
                     self.add_contact_console(name,self.address_book_sytem[name])
                 elif choice==2:
@@ -74,6 +74,8 @@ class AddressBookMain:
                 elif choice==5:
                     self.name_sorted(self.address_book_sytem[name])
                 elif choice==6:
+                    self.sort_city_state_zip(self.address_book_sytem[name])
+                elif choice==7:
                     break
 
     def add_contact_console(self,addbook_name,addbook):  # add a new Contact
@@ -230,5 +232,18 @@ class AddressBookMain:
     def name_sorted(self,addbook): # UC-11 sort the entries in the address book alphabetically by Person’s name
         if isinstance(addbook,Addressbook):
             addbook.name_sorted()
+
+    def sort_city_state_zip(self,addbook): # UC-12 Ability to sort the entries in the address book by City, State, or Zip 
+        choice=int(input("1. Sort by City\n2. Sort by State\n3. Sort by Zip\nEnter your choice:"))
+        if isinstance(addbook,Addressbook):
+            if choice==1:
+                city_name=input("Enter the name of City:")
+                addbook.sort_city(city_name)
+            elif choice==2:
+                state_name=input("Enter the name of State:")
+                addbook.sort_city(state_name)
+            elif choice==3:
+                zip=input("Enter the Zip:")
+                addbook.sort_city(zip)
 add1=AddressBookMain()
 add1.display_addressbook_menu()

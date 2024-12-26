@@ -1,7 +1,7 @@
 from contact import Contact
 from AddressBook import Addressbook
 
-# UC-9 Ability to view Persons by City or State
+# UC-10 Ability to get number of contact by City or State
 class AddressBookMain:
     def __init__(self):
         self.address_book_sytem={}
@@ -11,7 +11,7 @@ class AddressBookMain:
     def display_addressbook_menu(self):
         print("Welcome to Address Book Program")
         while True:
-            choice=int(input("1. Create New AddressBook\n2. Manage Existing AddressBook\n3. Delete Existing AddressBook\n4. View all the AddressBook\n5. Search by city or state\nEnter your choice:"))
+            choice=int(input("1. Create New AddressBook\n2. Manage Existing AddressBook\n3. Delete Existing AddressBook\n4. View all the AddressBook\n5. Search by city or state\n6. Count no of persons\nEnter your choice:"))
             if choice==1:
                 name=input("Enter the name of AddressBook to be created:")
                 self.check_add_addbook(name)
@@ -32,6 +32,8 @@ class AddressBookMain:
                     print(addbook)
             elif choice==5:
                 self.search_city_state()
+            elif choice==6:
+                self.count_city_state()
             else:
                 print("Invalid Choice")
                 break
@@ -60,7 +62,7 @@ class AddressBookMain:
         if name in self.address_book_sytem:
 
             while True:  # add multiple person
-                choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\n5. Sorted order of Contacts\n6. Return to Main Menu\nEnter your choice:"))
+                choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\n5. Return to Main Menu\nEnter your choice:"))
                 if choice==1:
                     self.add_contact_console(name,self.address_book_sytem[name])
                 elif choice==2:
@@ -70,8 +72,6 @@ class AddressBookMain:
                 elif choice==4:
                     self.view_all_contact_console(self.address_book_sytem[name])
                 elif choice==5:
-                    self.name_sorted(self.address_book_sytem[name])
-                elif choice==6:
                     break
 
     def add_contact_console(self,addbook_name,addbook):  # add a new Contact
@@ -198,6 +198,32 @@ class AddressBookMain:
                 print(f"no contacts in {state_name}")
         else:
             return
+    
+    def count_city_state(self): # UC-10 Ability to get number of contact by City or State
+        choice=int(input("1. Count persons in city\n2. Count persons in State\nEnter your choice:"))
+        if choice==1:
+            city_name=input("Enter the name of city:")
+            if city_name in self.city_dict:
+                count=0
+                for city,contacts in self.city_dict.items():
+                    if city==city_name:
+                        for contact in contacts:
+                            count+=1
+                print(f"No of contacts in {city_name} is {count}")
+            else:
+                print(f"no contacts in {city_name}")
+        
+        elif choice==2:
+            state_name=input("Enter the name of State:")
+            if state_name in self.state_dict:
+                count=0
+                for state,contacts in self.state_dict.items():
+                    if state==state_name:
+                        for contact in contacts:
+                            count+=1
+                print(f"No of contacts in {state_name} is {count}")
+            else:
+                print(f"no contacts in {state_name}")
 
 add1=AddressBookMain()
 add1.display_addressbook_menu()

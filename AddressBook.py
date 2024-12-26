@@ -31,4 +31,7 @@ class Addressbook:
             if isinstance(values,Contact):
                 print(f"{name}: {values}")
 
-    
+    def name_sorted(self):
+        sorted_dict=dict(sorted(self.contacts.items()))
+        for name,values in sorted_dict.items():
+            print(f"{name}: {values}")

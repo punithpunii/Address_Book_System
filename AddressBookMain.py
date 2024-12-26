@@ -1,7 +1,7 @@
 from contact import Contact
 from AddressBook import Addressbook
 
-#UC6 - add multiple Address Book to the System. Each Address Book has a unique Name
+# UC-7 there is no Duplicate Entry of the same Person in a particular Address Book
 class AddressBookMain:
     def __init__(self):
         self.address_book_sytem={}

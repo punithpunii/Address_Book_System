@@ -11,5 +11,8 @@ class Contact:
 
     def __str__(self):  #UC1 create a Contacts in Address Book
 
-        return f"{self.firstname},{self.lastname}, {self.address}, {self.city}, {self.state}, {self.zip}, {self.phonenumber}, {self.email}"
+        return f"[{self.firstname},{self.lastname}, {self.address}, {self.city}, {self.state}, {self.zip}, {self.phonenumber}, {self.email}]"
     
+    def to_list(self):
+    
+        return [self.firstname, self.lastname, self.address, self.city, self.state, self.zip, self.phonenumber, self.email]

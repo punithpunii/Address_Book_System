@@ -1,12 +1,12 @@
 from contact import Contact
 from AddressBook import Addressbook
 
-# UC-8 Ability to search Person in a City or State
+# UC-9 Ability to view Persons by City or State
 class AddressBookMain:
     def __init__(self):
         self.address_book_sytem={}
-        self.state_dict={} 
-        self.city_dict={}  
+        self.state_dict={}  # UC-9 Ability to view Persons by State
+        self.city_dict={}   # UC-9 Ability to view Persons by City
 
     def display_addressbook_menu(self):
         print("Welcome to Address Book Program")

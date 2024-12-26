@@ -31,7 +31,17 @@ class Addressbook:
             if isinstance(values,Contact):
                 print(f"{name}: {values}")
 
-    def name_sorted(self):
+    def name_sorted(self): # UC-11 sort the entries in the address book alphabetically by Person’s name
         sorted_dict=dict(sorted(self.contacts.items()))
         for name,values in sorted_dict.items():
             print(f"{name}: {values}")
+
+    def sort_city(self,sort_value): # UC-12 Ability to sort the entries in the address book by City, State, or Zip 
+        print(f"The contacts in {sort_value} are:")
+        for name,contact in self.contacts.items():
+            if contact.city==sort_value:
+                print(contact)
+            elif contact.state==sort_value:
+                print(contact)
+            elif contact.zip==sort_value:
+                print(contact)

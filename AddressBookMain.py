@@ -1,7 +1,7 @@
 from contact import Contact
 from AddressBook import Addressbook
 
-# UC-10 Ability to get number of contact by City or State
+# UC-11 sort the entries in the address book alphabetically by Person’s name
 class AddressBookMain:
     def __init__(self):
         self.address_book_sytem={}
@@ -62,7 +62,7 @@ class AddressBookMain:
         if name in self.address_book_sytem:
 
             while True:  # add multiple person
-                choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\n5. Return to Main Menu\nEnter your choice:"))
+                choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\n5. Sorted order of Contacts\n6. Return to Main Menu\nEnter your choice:"))
                 if choice==1:
                     self.add_contact_console(name,self.address_book_sytem[name])
                 elif choice==2:
@@ -72,6 +72,8 @@ class AddressBookMain:
                 elif choice==4:
                     self.view_all_contact_console(self.address_book_sytem[name])
                 elif choice==5:
+                    self.name_sorted(self.address_book_sytem[name])
+                elif choice==6:
                     break
 
     def add_contact_console(self,addbook_name,addbook):  # add a new Contact
@@ -225,5 +227,8 @@ class AddressBookMain:
             else:
                 print(f"no contacts in {state_name}")
 
+    def name_sorted(self,addbook): # UC-11 sort the entries in the address book alphabetically by Person’s name
+        if isinstance(addbook,Addressbook):
+            addbook.name_sorted()
 add1=AddressBookMain()
 add1.display_addressbook_menu()

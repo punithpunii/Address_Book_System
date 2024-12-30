@@ -1,7 +1,7 @@
 from contact import Contact
 from AddressBook import Addressbook
 
-# UC-12 Ability to sort the entries in the address book by City, State, or Zip 
+# UC-13 Ability to Read or Write the Address Book with Persons Contact into a File
 class AddressBookMain:
     def __init__(self):
         self.address_book_sytem={}
@@ -50,8 +50,8 @@ class AddressBookMain:
     def del_addbook(self,name):
         if name in self.address_book_sytem:
             del self.address_book_sytem[name]
-            self.remove_city_dict(name)
-            self.remove_state_dict(name)
+            self.del_city_dict(name)
+            self.del_state_dict(name)
             print(f"AddressBook {name} Deleted Successfully")
             return
         else:
@@ -62,7 +62,7 @@ class AddressBookMain:
         if name in self.address_book_sytem:
 
             while True:  # add multiple person
-                choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\n5. Sorted order of Contacts\n6. Sort by City, State or Zip\n7. Return to Main Menu\nEnter your choice:"))
+                choice=int(input("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View Contacts\n5. Sorted order of Contacts\n6. Sort by City, State or Zip\n7. Save Contact to file\n8.Load Contacts from File\n9.Return To main menu\nEnter your choice:"))
                 if choice==1:
                     self.add_contact_console(name,self.address_book_sytem[name])
                 elif choice==2:
@@ -75,7 +75,13 @@ class AddressBookMain:
                     self.name_sorted(self.address_book_sytem[name])
                 elif choice==6:
                     self.sort_city_state_zip(self.address_book_sytem[name])
-                elif choice==7:
+                elif choice == 7:
+                    file_name = input("Enter the file name to save to: ")
+                    self.save_to_file(self.address_book_sytem[name],file_name)
+                elif choice==8:
+                    file_name = input("Enter the file name to load from: ")
+                    self.load_from_file(self.address_book_sytem[name],file_name)
+                elif choice==9:
                     break
 
     def add_contact_console(self,addbook_name,addbook):  # add a new Contact
@@ -135,7 +141,6 @@ class AddressBookMain:
         if city_name not in self.city_dict:
                 self.city_dict[city_name] = []
         self.city_dict[city_name].append([contact_name,addbook_name])
-        print(self.city_dict)
 
     def update_state_dict(self,contact_name,state_name,addbook_name):
         for state,contact_names in self.state_dict.items():
@@ -150,7 +155,6 @@ class AddressBookMain:
         if state_name not in self.state_dict:
                 self.state_dict[state_name] = []
         self.state_dict[state_name].append([contact_name,addbook_name])
-        print(self.state_dict)
 
     def remove_city_dict(self,firstname,addbook_name):
         for city,contact_names in self.city_dict.items():
@@ -161,9 +165,8 @@ class AddressBookMain:
         cities_to_remove=[city for city in self.city_dict if self.city_dict[city]==[]]
         for city in cities_to_remove:  
                 del self.city_dict[city]
-        print(self.city_dict)
 
-    def remove_city_dict(self,addbook_name):
+    def del_city_dict(self,addbook_name):
         for city,contact_names in self.city_dict.items():
             for contact_list in contact_names:
                 if contact_list[1]==addbook_name:
@@ -178,9 +181,8 @@ class AddressBookMain:
         states_to_remove=[state for state in self.state_dict if self.state_dict[state]==[]]
         for state in states_to_remove:  
                 del self.state_dict[state]
-        print(self.state_dict)
 
-    def remove_state_dict(self,addbook_name):
+    def del_state_dict(self,addbook_name):
         for city,contact_names in self.state_dict.items():
             for contact_list in contact_names:
                 if contact_list[1]==addbook_name:
@@ -245,5 +247,15 @@ class AddressBookMain:
             elif choice==3:
                 zip=input("Enter the Zip:")
                 addbook.sort_city(zip)
+
+    def save_to_file(self,addbook,file_name): # UC-13 Ability to Read or Write the Address Book
+        if isinstance(addbook,Addressbook):
+            addbook.save_to_file(file_name)
+
+    def load_from_file(self,addbook,file_name): # UC-13 Ability to Read or Write the Address Book
+        if isinstance(addbook,Addressbook):
+            addbook.load_from_file(file_name)
+
+
 add1=AddressBookMain()
 add1.display_addressbook_menu()

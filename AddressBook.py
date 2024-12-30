@@ -1,3 +1,4 @@
+import json
 from contact import Contact
 class Addressbook:
 
@@ -45,3 +46,22 @@ class Addressbook:
                 print(contact)
             elif contact.zip==sort_value:
                 print(contact)
+
+    def save_to_file(self,file_name): # UC-13 Ability to Read or Write the Address Book
+        try:
+            with open(file_name,"w") as file:
+                json.dump({firstname:contact.__dict__ for firstname,contact in self.contacts.items()},file,indent=4)
+                print(f"Address book saved to {file_name}")
+        except Exception as e:
+            print(f"Error saving address book: {e}")
+        
+    def load_from_file(self,file_name): # UC-13 Ability to Read or Write the Address Book
+        try:
+            with open(file_name,"r") as file:
+                data=json.load(file)
+                self.contacts={firstname:Contact(**details) for firstname, details in data.items()}
+            print(f"Address book loaded from {file_name}")
+        except FileNotFoundError:
+            print(f"File {file_name} not found!")
+        except Exception as e:
+            print(f"Error loading address book: {e}")
